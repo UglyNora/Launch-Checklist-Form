@@ -15,11 +15,11 @@ window.onload = () =>{
       {
          alert("All fields required!");
       }
-      if ((Number(pilotName)) || (Number(copilotName)) )
+      else if ((Number(pilotName)) || (Number(copilotName)) )
       {
          alert("Pilot Name and Co-Pilot Name cannot contain numbers!");
       }
-      if (isNaN(fuelLevel) || (isNaN(cargoMass)))
+      else if (isNaN(fuelLevel) || (isNaN(cargoMass)))
       {
          alert("Fuel Level and Cargo Mass must contain a numerical value!");
          
@@ -29,22 +29,18 @@ window.onload = () =>{
        document.getElementById("faultyItems").style.visibility= "visible";
        pilotStatus.innerHTML = `Pilot ${pilotName} Ready`;
        copilotStatus.innerHTML = `Co-Pilot ${copilotName} Ready`;
-       if (fuelLevel < 10000){
+       launchStatus.innerHTML= "SHUTTLE READY FOR LAUNCH!";
+       launchStatus.style.color = "green"; 
+       if (fuelLevel < 10000 ) {
           launchStatus.innerHTML= "SHUTTLE NOT READY FOR LAUNCH!";
           launchStatus.style.color = "red";
           fuelStatus.innerHTML = "Not enough fuel to complete journey.";
+         } 
+       if(cargoMass > 10000) {
+          launchStatus.style.color = "red";
+          cargoStatus.innerHTML = "Shuttle too heavy for liftoff."
        }
-       if (cargoMass > 10000) {
-         launchStatus.innerHTML= "SHUTTLE NOT READY FOR LAUNCH!";
-         launchStatus.style.color = "red";
-         cargoStatus.innerHTML = "Shuttle too heavy for liftoff."
-         
-       }
-       else 
-       {
-         launchStatus.innerHTML= "SHUTTLE READY FOR LAUNCH!";
-         launchStatus.style.color = "green"; 
-       }
+      
        let URL = "https://handlers.education.launchcode.org/static/planets.json";
        fetch(URL).then( function(response) {
          response.json().then( function(json) {
