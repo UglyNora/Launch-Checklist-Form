@@ -10,7 +10,7 @@ window.onload = () =>{
       let copilotStatus = document.getElementById("copilotStatus");
       let fuelStatus = document.getElementById("fuelStatus");
       let cargoStatus = document.getElementById("cargoStatus");
-
+    
       if (pilotName === "" || copilotName === "" || fuelLevel ==="" || cargoMass === "")
       {
          alert("All fields required!");
@@ -22,8 +22,9 @@ window.onload = () =>{
       else if (isNaN(fuelLevel) || (isNaN(cargoMass)))
       {
          alert("Fuel Level and Cargo Mass must contain a numerical value!");
-         
+  
       }
+      
       else
       {
        document.getElementById("faultyItems").style.visibility= "visible";
@@ -31,15 +32,17 @@ window.onload = () =>{
        copilotStatus.innerHTML = `Co-Pilot ${copilotName} Ready`;
        launchStatus.innerHTML= "SHUTTLE READY FOR LAUNCH!";
        launchStatus.style.color = "green"; 
-       if (fuelLevel < 10000 ) {
-          launchStatus.innerHTML= "SHUTTLE NOT READY FOR LAUNCH!";
-          launchStatus.style.color = "red";
-          fuelStatus.innerHTML = "Not enough fuel to complete journey.";
-         } 
-       if(cargoMass > 10000) {
-          launchStatus.style.color = "red";
-          cargoStatus.innerHTML = "Shuttle too heavy for liftoff."
-       }
+
+      
+     if (fuelLevel < 10000 ) {
+         launchStatus.innerHTML= "SHUTTLE NOT READY FOR LAUNCH!";
+         launchStatus.style.color = "red";
+         fuelStatus.innerHTML = "Not enough fuel to complete journey.";
+        } 
+      else if(cargoMass > 10000) {
+         launchStatus.style.color = "red";
+         cargoStatus.innerHTML = "Shuttle too heavy for liftoff."
+      }
       
        let URL = "https://handlers.education.launchcode.org/static/planets.json";
        fetch(URL).then( function(response) {
@@ -60,7 +63,7 @@ window.onload = () =>{
             `;
          });
       });
-
+   
       }
 
    });
